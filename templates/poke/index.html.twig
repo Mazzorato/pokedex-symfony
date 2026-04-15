@@ -15,21 +15,21 @@
 
     
     <div class="flex flex-col gap-4">
-        {% for i in 1..151 %}
+        {% for pokemon in pokemons %}
             
             
             <div class="bg-black flex items-center justify-between px-6 py-1 text-white shadow-md">
                 
                 
                 <div class="flex items-center gap-12">
-                    <span class="text-2xl">{{ i }}</span>
-                    <span class="text-2xl">Bulbizarre</span> 
+                    <span class="text-2xl">{{ pokemon.id }}</span>
+                    <span class="text-2xl">{{ pokemon.name }}</span> 
                 </div>
 
                 
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ i }}.png" 
-                     alt="Pokemon {{ i }}" 
-                     class="w-20 h-20 drop-shadow-lg">
+                <img src="{{ pokemon.imageURL }}" 
+                     alt="Pokemon {{ pokemon.name }}" 
+                     class="w-24 h-24 drop-shadow-lg">
                 
             </div>
 

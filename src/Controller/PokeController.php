@@ -17,26 +17,34 @@ class PokeController extends AbstractController
     {
         $pokemons = $pokedexRepository->findAll();
          
-        return $this->render('poke/index.html.twig',[
-        'nombrePokemons' => count($pokemons),
-        'pokemons' =>$pokemons,
+        return $this->render('poke/index.html.twig', [
+            'nombrePokemons' => count($pokemons),
+            'pokemons' => $pokemons,
         ]);
     }
-    #[Route('/add',name:"app_add",methods:["GET","POST"])]
-    public function add(Request $request, EntityManagerInterface $entityManager): Response    {
-        // if ($request->isMethod('Post')){
-            // $name = $request->getPayload()->get('name');
-            // $imageUrl = $request->getPayload()->get('image_url');
 
-        $pokemon = new Pokedex();
-        $pokemon->setName("booba");
-        $pokemon->setImageUrl("http://unsplash.it/100/100");
+    #[Route('/add', name: "app_add", methods: ["GET", "POST"])]
+    public function add(Request $request, EntityManagerInterface $entityManager, PokedexRepository $pokedexRepository): Response 
+    {
+        $pokemons = $pokedexRepository->findAll();
+        $nombrePokemons = count($pokemons);
 
-        $entityManager->persist($pokemon);
-        $entityManager->flush();
-        // }
-        return $this->render('poke/add.html.twig',[
-        
+        if ($request->isMethod('POST')) {
+            $name = $request->getPayload()->get('name');
+            $imageUrl = $request->getPayload()->get('image_url');
+
+            $pokemon = new Pokedex();
+            $pokemon->setName($name); 
+            $pokemon->setImageUrl($imageUrl); 
+
+            $entityManager->persist($pokemon);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_index');
+        }
+
+        return $this->render('poke/add.html.twig', [
+            'nombrePokemons' => $nombrePokemons
         ]);
     }
 }

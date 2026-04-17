@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Pokedex;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,7 +16,10 @@ class PokedexType extends AbstractType
         $builder
             ->add('name')
             ->add('imageURL')
-            ->add('parcourir', SubmitType::class)
+            ->add('parcourir', FileType::class,[
+                'mapped'=>false
+
+            ])
             ->add('ajouter', SubmitType::class)
         ;
     }

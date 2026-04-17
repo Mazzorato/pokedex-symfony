@@ -11,16 +11,17 @@
     <a href="{{ path('app_index') }}" class="bg-green-500 hover:bg-green-600 px-6 py-2 rounded text-lg transition-colors">Accueil</a>
 </div>
     
-    <form method="post" class="">
+     {{ form_start(form) }}
+
         <div class="mb-4">
-            <input type="text" id="name" name="name" placeholder="Nom" required
-                   class="w-sm bg-[#f3cdac] placeholder-white px-4 py-3 rounded-lg focus:outline-none text-lg">
+            {{ form_widget(form.name,{ attr: { placeholder: "Nom", class : "w-sm bg-[#f3cdac] placeholder-white px-4 py-3 rounded-lg focus:outline-none text-lg"} }) }}
         </div>
         <div class="flex items-center gap-4">
             <label class="text-xl" for="image_url">Image :
-            <input class="bg-white text-black rounded border border-gray-300" type="url" id="image_url" name="image_url" required>Parcourir </label> </input>
+            {{ form_widget(form.imageURL,{ attr: { class : "text-xl " }}) }}
+            {{  form_widget(form.parcourir, { attr: { class : "w-30 h-10 bg-white text-black rounded border border-gray-300"}}) }}
         </div>
-        <button class="bg-green-500 hover:bg-green-600 px-6 py-2 rounded text-lg transition-colors cursor-pointer" type="submit">Ajouter</button>
-    </form>
+        {{  form_widget( form.ajouter, { attr: { class: "bg-green-500 hover:bg-green-600 px-6 py-2 rounded text-lg transition-colors cursor-pointer" }}) }}
+    {{ form_end(form) }}
 </div>
 {% endblock %}
